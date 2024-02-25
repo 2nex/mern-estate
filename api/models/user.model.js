@@ -16,6 +16,10 @@
         type: String,
         required: true,
         
+    },
+    avatar: {
+        type: String,
+        default: "https://cdn.pixabay.com/photo/20215/10/22/37/blank-profile-picture-973460_1280.png"
     }
  }, { timestamps: true });
 
