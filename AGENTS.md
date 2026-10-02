@@ -1,0 +1,9 @@
+# Development environment notes
+
+- Use `docker compose -f docker-compose.base44.yml up -d --build`. The frontend is host port 3000, while Express uses port 3000 only inside the private API container. Vite proxies `/api` via `API_PROXY_TARGET`, preserving same-origin authentication cookies.
+- Both application containers mount the checkout and run live-reloading development commands. Dependencies are synchronized with `npm ci` on startup into separate volumes. Do not replace this with production images or a built frontend.
+- MongoDB is local and persists in `mongo_data`. No migrations or seeds are required. The repository's home page intentionally only displays `Home` beneath the header; no listing feed is implemented there.
+- Verify `/` serves `/@vite/client` and `/src/main.jsx`; `/api/user/test` returns `{"message":"Api route is working!"}`. Compose healthchecks probe these existing endpoints. Check API logs for `Connected to MongoDb!`.
+- JWT_SECRET is a platform-managed development signing key. Firebase is optional for boot and local email/password authentication; Google sign-in and existing avatar uploads require the six VITE_FIREBASE_* values in `.base44/environment.json`. They come from the user's Firebase Web SDK config, not the previously committed project configuration. Enable the Google provider, configure authorized domains for the current preview, and configure Storage permissions in that Firebase project.
+- Platform env is `/run/base44/app.env`, outside git, listed last in each app service's env_file. Never put those keys into Compose environment overrides. Vite reads variables at startup; platform secret updates recreate affected services.
+- Frontend build check: `docker compose -f docker-compose.base44.yml exec -T web npm run build`. Do not serve its output in development.

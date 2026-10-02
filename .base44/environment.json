@@ -1,0 +1,43 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "JWT_SECRET",
+      "description": "Signing key for local email/password authentication. Generated for development; replace for production.",
+      "requiredAtBoot": true,
+      "generatedForDevelopment": true
+    },
+    {
+      "name": "VITE_FIREBASE_API_KEY",
+      "description": "Firebase project settings > General > Your apps > Web SDK config: apiKey. Needed for Google sign-in and uploads.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FIREBASE_AUTH_DOMAIN",
+      "description": "Firebase Web SDK config: authDomain.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FIREBASE_PROJECT_ID",
+      "description": "Firebase Web SDK config: projectId.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FIREBASE_STORAGE_BUCKET",
+      "description": "Firebase Web SDK config: storageBucket. Enable Firebase Storage for existing avatar uploads.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FIREBASE_MESSAGING_SENDER_ID",
+      "description": "Firebase Web SDK config: messagingSenderId.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "VITE_FIREBASE_APP_ID",
+      "description": "Firebase Web SDK config: appId.",
+      "requiredAtBoot": false
+    }
+  ]
+}
